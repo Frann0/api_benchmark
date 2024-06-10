@@ -1,0 +1,25 @@
+{
+  "name": "elysia-prisma",
+  "version": "1.0.50",
+  "prisma": {
+    "seed": "node prisma/seeder/seed.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts",
+    "prisma:migrate": " bunx prisma migrate reset",
+    "prisma:generate": "bunx prisma generate",
+    "prisma:seed": "bunx prisma db seed",
+    "prisma": "bun run prisma:generate && bun run prisma:migrate "
+  },
+  "dependencies": {
+    "@prisma/client": "5.15.0",
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "bun-types": "latest",
+    "prisma": "^5.15.0"
+  },
+  "module": "src/index.js"
+}
