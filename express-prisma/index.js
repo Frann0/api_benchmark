@@ -4,6 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const app = express();
+app.use(express.json());
 const port = 3001;
 
 app.get("/users", async (req, res) => {
@@ -26,6 +27,14 @@ app.get("/products/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   const a = await prisma.product.findUnique({ where: { id } });
   res.status(200).send(a);
+});
+
+app.post("/WriteTest", async (req, res) => {
+  const { name } = req.body;
+  const a = await prisma.writeTest.create({
+    data: { name },
+  });
+  res.status(201).send(a);
 });
 
 app.listen(port, () => {

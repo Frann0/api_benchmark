@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 
 const main = async () => {
   try {
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 1000; i++) {
       try {
-        const t = prisma.user.create({
+        const t = await prisma.user.create({
           data: {
             name: faker.person.fullName(),
             email: faker.internet.email(),
@@ -16,20 +16,20 @@ const main = async () => {
         console.error(`Error creating user ${i}: ${error}`);
       }
     }
-    for (let i = 0; i < 100000; i++) {
-      prisma.product.create({
+    for (let i = 0; i < 100; i++) {
+      await prisma.product.create({
         data: {
           name: faker.commerce.productName(),
-          price: faker.commerce.price(),
+          price: Number(faker.commerce.price()),
         },
       });
     }
 
-    for (let i = 0; i < 100000; i++) {
-      prisma.orders.create({
+    for (let i = 0; i < 10000; i++) {
+      await prisma.orders.create({
         data: {
-          userId: Math.floor(Math.random() * 100000),
-          productId: Math.floor(Math.random() * 100000),
+          userId: Math.floor(Math.random() * 1000),
+          productId: Math.floor(Math.random() * 100),
           quantity: Math.floor(Math.random() * 10),
         },
       });

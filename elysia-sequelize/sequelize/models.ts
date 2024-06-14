@@ -106,6 +106,7 @@ WriteTest.init({
   sequelize,
   modelName: 'WriteTest',
   tableName: 'WriteTest',
+  timestamps: false
 });
 
 export { User, Product, Order, WriteTest };

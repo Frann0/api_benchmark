@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { User } from "./entity/User";
 import { Product } from "./entity/Product";
+import { WriteTest } from "./entity/WriteTest";
 
 AppDataSource.initialize()
   .then(async (connection) => {
@@ -39,10 +40,18 @@ AppDataSource.initialize()
       res.status(200).send(product);
     });
 
+    app.post("/WriteTest", async (req: Request, res: Response) => {
+      const { name } = req.body;
+      const write = new WriteTest();
+      write.name = name;
+      const t = await connection.manager.save(write);
+      res.status(200).send({ id: t.id, name: t.name });
+    });
+
     app.listen(3001);
 
     console.log(
-      "Express server has started on port 3001. Open http://localhost:3001/users to see results"
+      "Express server has started on port 3001. Open http://localhost:3001/users to see results",
     );
   })
   .catch((error) => console.log(error));

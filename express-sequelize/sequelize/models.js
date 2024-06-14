@@ -120,6 +120,7 @@ WriteTest.init(
     sequelize,
     modelName: "WriteTest",
     tableName: "WriteTest",
+    timestamps: false
   }
 );
 

@@ -16,6 +16,9 @@ const app = new Elysia()
   .get("/products/:id", ({ params: { id } }) => {
     return prisma.product.findUnique({ where: { id: Number(id) } });
   })
+  .post("/WriteTest", ({ body }) => {
+    return prisma.writeTest.create({ data: body });
+  })
   .listen(3001);
 
 console.log(
